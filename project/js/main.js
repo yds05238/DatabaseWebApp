@@ -73,7 +73,7 @@ function toggleSignIn() {
 // If a user isn't authenticated, we should not show the stream and prompt them to log in.
 // If a use IS authenticated, we should load/show the stream and give them the option to log out.
 window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function(user){
     if (user) {
       $('#stream').show();
       $('#login-button').html("Log out");
@@ -85,3 +85,7 @@ window.onload = function() {
     $('#login-button').attr("disabled", false);
   });
 };
+
+
+
+
