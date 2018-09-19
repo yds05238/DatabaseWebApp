@@ -51,10 +51,10 @@ function handleMessageFormSubmit() {
 }
 
 // Gets called whenever the user clicks "sign in" or "sign out".
-function toggleSignIn() {
+/**function toggleSignIn() {
   if (!firebase.auth().currentUser) { // if no user, handle login
     var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    provider.addScope("https://www.googleapis.com/auth/plus.login");
     firebase.auth().signInWithPopup(provider).then(function(result) {
       console.log("success");
     }).catch(function(error) {
@@ -66,7 +66,28 @@ function toggleSignIn() {
 
   //This disables the button until login or logout is successful
   $('#login-button').attr("disabled", true);
+}*/
+function toggleSignIn() {
+  if (!firebase.auth().currentUser) {
+    // [START createprovider]
+    var provider = new firebase.auth.GoogleAuthProvider();
+    // [END createprovider]
+    // [START addscopes]
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    // [END addscopes]
+    // [START signin]
+    firebase.auth().signInWithPopup(provider);
+    // [END signin]
+  } else {
+    // [START signout]
+    firebase.auth().signOut();
+    // [END signout]
+  }
+  // [START_EXCLUDE]
+  document.getElementById('quickstart-sign-in').disabled = true;
+  // [END_EXCLUDE]
 }
+
 
 
 // The main purpose of this function is to set up a listener (using firebase) for when the auth state changes.
